@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: raw_data
+    database: jewellery-analytics-portfolio
+    schema: raw_data
+    tables:
+      - name: raw_products
+      - name: raw_customers
+      - name: raw_orders
+      - name: raw_items
+      - name: raw_stores
+      - name: raw_supplies

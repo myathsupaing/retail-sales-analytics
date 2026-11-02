@@ -1,0 +1,33 @@
+
+version: 2
+
+models:
+  - name: int_order_items
+    description: "Combines order items, orders and product information."
+
+    columns:
+      - name: item_id
+        description: "Unique identifier for each order item."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: order_id
+        description: "Order associated with each item."
+        data_tests:
+          - not_null
+
+      - name: product_sku
+        description: "Product associated with each item."
+        data_tests:
+          - not_null
+
+      - name: customer_id
+        description: "Customer who placed the order."
+        data_tests:
+          - not_null
+
+      - name: product_name
+        description: "Name of the purchased product."
+        data_tests:
+          - not_null

@@ -1,0 +1,80 @@
+version: 2
+
+models:
+  - name: stg_products
+    description: "Cleaned and standardised product data."
+    columns:
+      - name: sku
+        description: "Unique product SKU."
+        data_tests:
+          - not_null
+          - unique
+
+  - name: stg_customers
+    description: "Cleaned customer data."
+
+    columns:
+      - name: customer_id
+        description: "Unique customer identifier."
+        data_tests:
+          - not_null
+          - unique
+
+  - name: stg_orders
+    description: "Cleaned order transaction data."
+    columns:
+      - name: order_id
+        description: "Unique order identifier."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: customer_id
+        description: "Customer associated with the order."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_customers')
+                field: customer_id
+
+  - name: stg_items
+    description: "Cleaned order item data."
+    columns:
+      - name: item_id
+        description: "Unique order item identifier."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: order_id
+        description: "Order associated with this item."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_orders')
+                field: order_id
+
+      - name: product_sku
+        description: "Product associated with this item."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_products')
+                field: sku
+
+  - name: stg_stores
+    description: "Cleaned store information."
+    columns:
+      - name: store_id
+        description: "Unique store identifier."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: store_name
+        description: "Name of the store."
+        data_tests:
+          - not_null

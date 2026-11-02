@@ -1,0 +1,182 @@
+version: 2
+
+models:
+  - name: fct_sales
+    description: "Sales fact table at individual order-item level."
+
+    columns:
+      - name: item_id
+        description: "Unique identifier for each order item."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: order_id
+        data_tests:
+          - not_null
+
+      - name: customer_id
+        data_tests:
+          - not_null
+
+      - name: product_sku
+        data_tests:
+          - not_null
+
+      - name: item_revenue
+        description: "Provisional item-level value based on listed product price."
+        data_tests:
+          - not_null
+
+  - name: fct_orders
+    description: "Order-level fact table containing sales, tax and order values."
+
+    columns:
+      - name: order_id
+        data_tests:
+          - not_null
+          - unique
+
+      - name: customer_id
+        data_tests:
+          - not_null
+
+      - name: subtotal
+        data_tests:
+          - not_null
+
+      - name: order_total
+        data_tests:
+          - not_null
+
+      - name: total_items
+        data_tests:
+          - not_null
+
+  - name: mart_sales_by_product
+    description: "Product-level sales performance summary."
+
+    columns:
+      - name: product_sku
+        data_tests:
+          - not_null
+          - unique
+
+      - name: product_name
+        data_tests:
+          - not_null
+
+      - name: total_sales
+        data_tests:
+          - not_null
+
+      - name: units_sold
+        data_tests:
+          - not_null
+
+  - name: mart_sales_by_store
+    description: "Store-level sales performance summary."
+
+    columns:
+      - name: store_id
+        data_tests:
+          - not_null
+          - unique
+
+      - name: store_name
+        data_tests:
+          - not_null
+
+      - name: total_orders
+        data_tests:
+          - not_null
+
+      - name: total_sales_before_tax
+        data_tests:
+          - not_null
+
+      - name: total_units_sold
+        data_tests:
+          - not_null
+
+  - name: mart_customer_performance
+    description: "Customer-level purchasing and value analysis."
+
+    columns:
+      - name: customer_id
+        data_tests:
+          - not_null
+          - unique
+
+      - name: total_orders
+        data_tests:
+          - not_null
+
+      - name: total_spend_before_tax
+        data_tests:
+          - not_null
+
+      - name: average_order_value
+        data_tests:
+          - not_null
+  - name: mart_customer_rfm
+    description: "Exploratory RFM customer segmentation."
+
+    columns:
+      - name: customer_id
+        data_tests:
+          - not_null
+          - unique
+
+      - name: recency_days
+        data_tests:
+          - not_null
+
+      - name: frequency
+        data_tests:
+          - not_null
+
+      - name: monetary_value
+        data_tests:
+          - not_null
+
+  - name: mart_daily_sales
+    description: "Daily retail sales performance."
+
+    columns:
+      - name: sales_date
+        data_tests:
+          - not_null
+          - unique
+
+      - name: total_orders
+        data_tests:
+          - not_null
+
+      - name: total_sales
+        data_tests:
+          - not_null
+
+      - name: total_units_sold
+        data_tests:
+          - not_null
+
+  - name: mart_daily_sales_by_category
+    description: "Daily sales performance by product category."
+
+    columns:
+      - name: sales_date
+        data_tests:
+          - not_null
+
+      - name: product_type
+        data_tests:
+          - not_null
+
+      - name: units_sold
+        data_tests:
+          - not_null
+
+      - name: total_sales
+        data_tests:
+          - not_null
